@@ -7,6 +7,16 @@ let passwordRegEx=/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,40})/;
 
 function setusername(){
     userName = $("#username").val();
+    $.ajax({
+        type: 'POST',
+        url: 'https://dev.stedi.me/twofactorlogin/'+userName,
+        data: JSON.stringify({userName, password}),
+        success: function(data) {
+            window.location.href = "/timer.html#"+data;//add the token to the url
+        },
+        contentType: "application/text",
+        dataType: 'text'
+    });
 }
 
 function setuserpassword(){
@@ -51,7 +61,7 @@ function userlogin(){
     setusername();
     $.ajax({
         type: 'POST',
-        url: '/login',
+        url: 'https://dev.stedi.me/twofactorlogin/'+userName,
         data: JSON.stringify({userName, password}),
         success: function(data) {
             window.location.href = "/timer.html#"+data;//add the token to the url
