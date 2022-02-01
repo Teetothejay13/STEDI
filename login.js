@@ -25,12 +25,12 @@ function userlogin(){
     setusername();
     $.ajax({
         type: 'POST',
-        url: '/login',
-        data: ' {"userName":"'+ phoneNumber +'", "password":"'+ password +'"}', // or JSON.stringify ({name: 'jonas'}),
+        url: '/https://dev.stedi.me/twofactorlogin',
+        data: ' {"userName":"'+ phoneNumber +'", "password":"'+ oneTimePassword +'"}', // or JSON.stringify ({name: 'jonas'}),
         success: function(data) {
             savetoken(data);
             localStorage.removeItem("customer");
-            window.location.href = "/timer.html";
+            window.location.href = '/timer.html#' + data;
          },
         contentType: "application/text",
         dataType: 'text'
